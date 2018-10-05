@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
+import ReactMapGL from 'react-map-gl'
 
 class HomeScreen extends Component {
+
+  state = {
+    viewport: {
+      width: 400,
+      height: 400,
+      latitude: 37.7577,
+      longitude: -122.4376,
+      zoom: 8
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ReactMapGL
+        {...this.state.viewport}
+        onViewportChange={(viewport) => this.setState({ viewport })}
+      />
     );
   }
 }
