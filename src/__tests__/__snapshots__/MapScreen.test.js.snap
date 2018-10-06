@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapScreen renders correct size 1`] = `
+<div
+  style={
+    Object {
+      "cursor": "-webkit-grab",
+      "height": 768,
+      "position": "relative",
+      "width": 1024,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "height": 768,
+        "position": "relative",
+        "width": 1024,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "height": 768,
+          "visibility": "visible",
+          "width": 1024,
+        }
+      }
+    />
+    <div
+      className="overlays"
+      style={
+        Object {
+          "height": 768,
+          "left": 0,
+          "overflow": "hidden",
+          "position": "absolute",
+          "top": 0,
+          "width": 1024,
+        }
+      }
+    />
+  </div>
+</div>
+`;
