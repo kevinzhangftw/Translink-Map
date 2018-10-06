@@ -18,6 +18,7 @@ class HomeScreen extends Component {
       <ReactMapGL
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({ viewport })}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPTOKEN}
       />
     );
   }
