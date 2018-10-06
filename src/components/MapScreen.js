@@ -6,11 +6,11 @@ class MapScreen extends Component {
 
   state = {
     viewport: {
-      width: 800,
-      height: 800,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 8
+      width: window.innerWidth,
+      height: window.innerHeight,
+      latitude: 49.2811831,
+      longitude: -123.1162378,
+      zoom: 12
     }
   }
 
