@@ -9,7 +9,7 @@ const readActionCreatorsFor = (type, key) => createActionCreators('read', {
   requestKey: key,
 })
 
-const requestReadResources = (type, key) => ({
+export const requestReadResources = (type, key) => ({
   type: actionTypes.READ_RESOURCES_PENDING,
   resourceType: type,
   requestKey: key,
@@ -19,7 +19,7 @@ const xhrOptions = {
   json: true
 }
 
-const fetchResources = (resourceType, resourceKey) => (dispatch) => {
+export const fetchResources = (resourceType, resourceKey) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
     config.apiUrl,
@@ -50,6 +50,3 @@ const fetchResources = (resourceType, resourceKey) => (dispatch) => {
     },
   )
 }
-
-export default fetchResources
-

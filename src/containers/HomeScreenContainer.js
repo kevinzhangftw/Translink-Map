@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import HomeScreen from '../components/HomeScreen'
-import fetchResources from '../actions/resources'
+import { fetchResources } from '../actions/resources'
 
 class HomeScreenContainer extends Component {
   componentDidMount () {
