@@ -13,7 +13,7 @@ const requestReadResources = (type, key) => ({
   requestKey: key,
 })
 
-export const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) => {
+const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
     queryString,
@@ -44,4 +44,6 @@ export const fetchResources = (resourceType, resourceKey, queryString) => (dispa
     },
   )
 }
+
+export default fetchResources
 

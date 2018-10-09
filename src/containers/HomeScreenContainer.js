@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import HomeScreen from '../components/HomeScreen'
-import { fetchResources } from '../actions/resources'
+import fetchResources from '../actions/resources'
 
 class HomeScreenContainer extends Component {
   componentDidMount () {
@@ -10,6 +10,7 @@ class HomeScreenContainer extends Component {
   }
 
   render() {
+    console.log('props:', this.props)
     return (
       <HomeScreen />
     )
@@ -23,7 +24,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchBuses: dispatch(fetchResources('buses', 'fetchBuses', apiEndpoint))
+  fetchBuses: () => dispatch(fetchResources('buses', 'fetchBuses', apiEndpoint))
 })
 
 HomeScreenContainer.propTypes = {
