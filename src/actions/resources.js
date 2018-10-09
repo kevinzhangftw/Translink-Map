@@ -1,8 +1,8 @@
 import { actionTypes } from 'redux-resource'
 import xhr from 'xhr'
 import createActionCreators from 'redux-resource-action-creators'
-
-const apiEndpoint = `http://api.translink.ca/rttiapi/v1/buses?apikey=${process.env.REACT_APP_TRANSLINK}`
+import config from '../config'
+// const apiEndpoint = `http://api.translink.ca/rttiapi/v1/buses?apikey=${process.env.REACT_APP_TRANSLINK}`
 
 const readActionCreatorsFor = (type, key) => createActionCreators('read', {
   resourceType: type,
@@ -22,7 +22,7 @@ const xhrOptions = {
 const fetchResources = (resourceType, resourceKey) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
-    apiEndpoint,
+    config.apiUrl,
     xhrOptions,
     (err, res, body) => {
       if (req.aborted) {
