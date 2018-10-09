@@ -2,6 +2,8 @@ import { actionTypes } from 'redux-resource'
 import xhr from 'xhr'
 import createActionCreators from 'redux-resource-action-creators'
 
+const apiEndpoint = `http://api.translink.ca/rttiapi/v1/buses?apikey=${process.env.REACT_APP_TRANSLINK}`
+
 const readActionCreatorsFor = (type, key) => createActionCreators('read', {
   resourceType: type,
   requestKey: key,
@@ -14,16 +16,13 @@ const requestReadResources = (type, key) => ({
 })
 
 const xhrOptions = {
-  json: true,
-  // headers: {
-  //   'accept':'application/JSON'
-  // }
+  json: true
 }
 
-const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) => {
+const fetchResources = (resourceType, resourceKey) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
-    queryString,
+    apiEndpoint,
     xhrOptions,
     (err, res, body) => {
       if (req.aborted) {
@@ -39,7 +38,7 @@ const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) =>
           },
         }))
       } else {
-        // setting id to vehicleNo
+        // each bus resource is id'ed with vehicleNo, so set id to vehicleNo
         const resultsWithId = body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
         dispatch(readActionCreatorsFor(resourceType, resourceKey).succeeded({
           resources: resultsWithId,

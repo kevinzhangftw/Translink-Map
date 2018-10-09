@@ -16,14 +16,12 @@ class HomeScreenContainer extends Component {
   }
 }
 
-const apiEndpoint = `http://api.translink.ca/rttiapi/v1/buses?apikey=${process.env.REACT_APP_TRANSLINK}`
-
 const mapStateToProps = state => ({
 
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchBuses: () => dispatch(fetchResources('buses', 'fetchBuses', apiEndpoint))
+  fetchBuses: () => dispatch(fetchResources('buses', 'fetchBuses'))
 })
 
 HomeScreenContainer.propTypes = {
