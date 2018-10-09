@@ -13,11 +13,18 @@ const requestReadResources = (type, key) => ({
   requestKey: key,
 })
 
+const xhrOptions = {
+  json: true,
+  // headers: {
+  //   'accept':'application/JSON'
+  // }
+}
+
 const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
     queryString,
-    { json: true },
+    xhrOptions,
     (err, res, body) => {
       if (req.aborted) {
         dispatch(readActionCreatorsFor(resourceType, resourceKey).idle({
@@ -33,7 +40,7 @@ const fetchResources = (resourceType, resourceKey, queryString) => (dispatch) =>
         }))
       } else {
         // setting id to vehicleNo
-        const resultsWithId = body.results.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
+        const resultsWithId = body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
         dispatch(readActionCreatorsFor(resourceType, resourceKey).succeeded({
           resources: resultsWithId,
           requestProperties: {

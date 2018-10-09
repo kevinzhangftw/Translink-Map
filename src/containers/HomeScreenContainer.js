@@ -10,7 +10,6 @@ class HomeScreenContainer extends Component {
   }
 
   render() {
-    console.log('props:', this.props)
     return (
       <HomeScreen />
     )
