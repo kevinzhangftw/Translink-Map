@@ -19,6 +19,33 @@ const xhrOptions = {
   json: true
 }
 
+const fetchResourcesIdle = (resourceType, resourceKey) =>
+  readActionCreatorsFor(resourceType, resourceKey).idle({
+    requestProperties: {
+      statusCode: null,
+    },
+  })
+
+const fetchResourcesFailed = (resourceType, resourceKey, statusCode) =>
+  readActionCreatorsFor(resourceType, resourceKey).failed({
+    requestProperties: {
+      statusCode: statusCode,
+    },
+  })
+
+const setIdToVehicleNo = body =>
+  body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
+
+const getBody = body => setIdToVehicleNo(body)
+
+const fetchResourcesSuccess = (resourceType, resourceKey, statusCode, resources) =>
+  readActionCreatorsFor(resourceType, resourceKey).succeeded({
+    resources: resources,
+    requestProperties: {
+      statusCode: statusCode,
+    },
+  })
+
 export const fetchResources = (resourceType, resourceKey) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
