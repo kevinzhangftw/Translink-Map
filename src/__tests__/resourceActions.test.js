@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import fetchMock from 'fetch-mock'
+import mock from 'xhr-mock'
 import { actionTypes } from 'redux-resource'
 import { requestReadResources, fetchResources } from '../actions/resources'
 import config from '../config'
@@ -21,14 +21,12 @@ describe('actions', () => {
 })
 
 describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-    fetchMock.restore()
-  })
+  beforeEach(() => mock.setup())
+  afterEach(() => mock.teardown())
 
   it('creates READ_RESOURCES_SUCCESS when fetching buses has been done', () => {
-    fetchMock
-      .getOnce(config.apiUrl, { body: sampleData, headers: { 'content-type': 'application/json' } })
+    mock
+      .get(config.apiUrl, { body: sampleData, headers: { 'content-type': 'application/json' } })
 
     const expectedActions = [
       { type: actionTypes.READ_RESOURCES_PENDING },
@@ -37,7 +35,6 @@ describe('async actions', () => {
     const store = mockStore({ buses: [] })
 
     return store.dispatch(fetchResources()).then(() => {
-      // return of async actions
       expect(store.getActions()).toEqual(expectedActions)
     })
   })

@@ -36,7 +36,7 @@ const fetchResourcesFailed = (resourceType, resourceKey, statusCode) =>
 const setIdToVehicleNo = body =>
   body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
 
-const getBody = body => setIdToVehicleNo(body)
+const getBodyWithId = body => setIdToVehicleNo(body)
 
 const fetchResourcesSuccess = (resourceType, resourceKey, statusCode, resources) =>
   readActionCreatorsFor(resourceType, resourceKey).succeeded({
@@ -53,26 +53,17 @@ export const fetchResources = (resourceType, resourceKey) => (dispatch) => {
     xhrOptions,
     (err, res, body) => {
       if (req.aborted) {
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).idle({
-          requestProperties: {
-            statusCode: null,
-          },
-        }))
+        dispatch(fetchResourcesIdle(resourceType, resourceKey))
       } else if (err || res.statusCode >= 400) {
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).failed({
-          requestProperties: {
-            statusCode: res.statusCode,
-          },
-        }))
+        dispatch(fetchResourcesFailed(resourceType, resourceKey, res.statusCode))
       } else {
-        // each bus resource is id'ed with vehicleNo, so set id to vehicleNo
-        const resultsWithId = body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).succeeded({
-          resources: resultsWithId,
-          requestProperties: {
-            statusCode: res.statusCode,
-          },
-        }))
+        dispatch(fetchResourcesSuccess(
+          resourceType,
+          resourceKey,
+          res.statusCode,
+          getBodyWithId(body)
+          )
+        )
       }
     },
   )
