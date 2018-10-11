@@ -13,10 +13,10 @@ class HomeScreenContainer extends Component {
   }
 
   render() {
-    console.log('buses fetched are: ', this.props.buses)
+    // const { buses } = this.props.buses
     return _.isEmpty(this.props.buses) ?
       <Spinner /> :
-      <HomeScreen />
+      <HomeScreen buses={this.props.buses} />
   }
 }
 

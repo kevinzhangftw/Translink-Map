@@ -34,6 +34,8 @@ class MapScreen extends Component {
     })
   }
 
+
+
   render() {
     return (
       <ReactMapGL
