@@ -11,12 +11,16 @@ const mockStore = configureMockStore(middlewares)
 
 describe('actions', () => {
   it('requestReadResources should dispatch status READ_RESOURCES_PENDING', () => {
-    const expectedAction = {
+    const initialState = {}
+    const store = mockStore(initialState)
+    store.dispatch(requestReadResources('buses', 'fetchBuses'))
+    const actions = store.getActions()
+    const expectedPayload = {
       type: actionTypes.READ_RESOURCES_PENDING,
       resourceType: 'buses',
-      requestKey: 'fetchBuses',
+      requestKey: 'fetchBuses'
     }
-    expect(requestReadResources('buses', 'fetchBuses')).toEqual(expectedAction)
+    expect(actions).toEqual([expectedPayload])
   })
 })
 
@@ -25,6 +29,7 @@ describe('async actions', () => {
   afterEach(() => mock.teardown())
 
   it('creates READ_RESOURCES_SUCCESS when fetching buses has been done', () => {
+    const store = mockStore({ buses: [] })
     mock
       .get(config.apiUrl, { body: sampleData, headers: { 'content-type': 'application/json' } })
 
@@ -32,7 +37,6 @@ describe('async actions', () => {
       { type: actionTypes.READ_RESOURCES_PENDING },
       { type: actionTypes.READ_RESOURCES_SUCCESS, body: sampleData }
     ]
-    const store = mockStore({ buses: [] })
 
     return store.dispatch(fetchResources()).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
