@@ -6,6 +6,7 @@ import _ from 'lodash'
 import HomeScreen from '../components/HomeScreen'
 import Spinner from '../components/Spinner'
 import { fetchResources } from '../actions/resources'
+import { getBusesArray } from '../selectors/buses'
 
 class HomeScreenContainer extends Component {
   componentDidMount() {
@@ -13,15 +14,15 @@ class HomeScreenContainer extends Component {
   }
 
   render() {
-    // const { buses } = this.props.buses
-    return _.isEmpty(this.props.buses) ?
+    const { buses } = this.props
+    return _.isEmpty(buses) ?
       <Spinner /> :
-      <HomeScreen buses={this.props.buses} />
+      <HomeScreen buses={buses} />
   }
 }
 
 const mapStateToProps = state => ({
-  buses: state.buses.resources
+  buses: getBusesArray(state)
 })
 
 const mapDispatchToProps = dispatch => ({
