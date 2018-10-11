@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import ReactMapGL from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import PropTypes from 'prop-types'
 // import mapboxGl from '../css/mapbox-gl.css'
+import BusPin from '../assets/BusPin'
 
 class MapScreen extends Component {
   state = {
@@ -39,7 +40,11 @@ class MapScreen extends Component {
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({ viewport })}
         mapboxApiAccessToken={process.env.REACT_APP_MAPTOKEN}
-      />
+      >
+        <Marker latitude={this.props.latitude} longitude={this.props.longitude}>
+          <BusPin />
+        </Marker>
+      </ReactMapGL>
     )
   }
 }
