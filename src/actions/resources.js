@@ -9,7 +9,7 @@ const readActionCreatorsFor = (type, key) => createActionCreators('read', {
   requestKey: key,
 })
 
-const requestReadResources = (type, key) => ({
+export const requestReadResources = (type, key) => ({
   type: actionTypes.READ_RESOURCES_PENDING,
   resourceType: type,
   requestKey: key,
@@ -19,37 +19,52 @@ const xhrOptions = {
   json: true
 }
 
-const fetchResources = (resourceType, resourceKey) => (dispatch) => {
+const fetchResourcesIdle = (resourceType, resourceKey) =>
+  readActionCreatorsFor(resourceType, resourceKey).idle({
+    requestProperties: {
+      statusCode: null,
+    },
+  })
+
+const fetchResourcesFailed = (resourceType, resourceKey, statusCode) =>
+  readActionCreatorsFor(resourceType, resourceKey).failed({
+    requestProperties: {
+      statusCode: statusCode,
+    },
+  })
+
+const setIdToVehicleNo = body =>
+  body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
+
+const getBodyWithId = body => setIdToVehicleNo(body)
+
+const fetchResourcesSuccess = (resourceType, resourceKey, statusCode, resources) =>
+  readActionCreatorsFor(resourceType, resourceKey).succeeded({
+    resources: resources,
+    requestProperties: {
+      statusCode: statusCode,
+    },
+  })
+
+export const fetchResources = (resourceType, resourceKey) => (dispatch) => {
   dispatch(requestReadResources(resourceType, resourceKey))
   const req = xhr.get(
     config.apiUrl,
     xhrOptions,
     (err, res, body) => {
       if (req.aborted) {
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).idle({
-          requestProperties: {
-            statusCode: null,
-          },
-        }))
+        dispatch(fetchResourcesIdle(resourceType, resourceKey))
       } else if (err || res.statusCode >= 400) {
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).failed({
-          requestProperties: {
-            statusCode: res.statusCode,
-          },
-        }))
+        dispatch(fetchResourcesFailed(resourceType, resourceKey, res.statusCode))
       } else {
-        // each bus resource is id'ed with vehicleNo, so set id to vehicleNo
-        const resultsWithId = body.map(each => ({ ...each, ...{ id: each.VehicleNo } }))
-        dispatch(readActionCreatorsFor(resourceType, resourceKey).succeeded({
-          resources: resultsWithId,
-          requestProperties: {
-            statusCode: res.statusCode,
-          },
-        }))
+        dispatch(fetchResourcesSuccess(
+          resourceType,
+          resourceKey,
+          res.statusCode,
+          getBodyWithId(body)
+          )
+        )
       }
     },
   )
 }
-
-export default fetchResources
-

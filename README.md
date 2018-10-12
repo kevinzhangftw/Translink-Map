@@ -10,7 +10,7 @@ yarn will install all the packages
 
 To Run the app locally, the easiest way to deal with the CORS (Allow-Control-Allow-Origin) problem is to install the chrome extension
 
-### Allow-Control-Allow-Origin: *
+#### Allow-Control-Allow-Origin
 
 Remember to turn on the extension only when needed, as it does interfere with some sites like youtube.
 
