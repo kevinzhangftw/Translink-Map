@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL from 'react-map-gl'
 import PropTypes from 'prop-types'
 // import mapboxGl from '../css/mapbox-gl.css'
-import BusPin from '../assets/BusPin'
+// import BusPin from '../assets/BusPin'
 
 class MapScreen extends Component {
   state = {
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
-      latitude: this.props.latitude,
-      longitude: this.props.longitude,
+      latitude: this.props.currentLatitude,
+      longitude: this.props.currentLongitude,
       zoom: this.props.zoomLevel
     }
   }
@@ -34,8 +34,6 @@ class MapScreen extends Component {
     })
   }
 
-
-
   render() {
     return (
       <ReactMapGL
@@ -43,17 +41,15 @@ class MapScreen extends Component {
         onViewportChange={(viewport) => this.setState({ viewport })}
         mapboxApiAccessToken={process.env.REACT_APP_MAPTOKEN}
       >
-        <Marker latitude={this.props.latitude} longitude={this.props.longitude}>
-          <BusPin />
-        </Marker>
+        {this.props.busPins}
       </ReactMapGL>
     )
   }
 }
 
 MapScreen.propTypes = {
-  latitude: PropTypes.number,
-  longitude: PropTypes.number,
+  currentLatitude: PropTypes.number,
+  currentLongitude: PropTypes.number,
   zoomLevel: PropTypes.number
 }
 
