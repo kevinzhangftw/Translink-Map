@@ -10,7 +10,7 @@ class HomeScreen extends Component {
   zoomLevel = 12
 
   renderBusPin = bus => (
-    <Marker latitude={bus.Latitude} longitude={bus.Longitude}>
+    <Marker key={bus.VehicleNo} latitude={bus.Latitude} longitude={bus.Longitude}>
       <BusPin />
     </Marker>
   )
