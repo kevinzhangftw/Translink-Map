@@ -10,7 +10,19 @@ import { getBusesArray } from '../selectors/buses'
 
 class HomeScreenContainer extends Component {
   componentDidMount() {
-    this.props.fetchBuses()
+    const fetchInterval = 5 * 1000
+    this.timer = setInterval(this.props.fetchBuses, fetchInterval)
+    // this.timer = setInterval(() => this.testPolling(this.props.fetchBuses), fetchInterval)
+  }
+
+  // testPolling(fetchBuses) {
+  //   console.log('fetching buses again')
+  //   fetchBuses()
+  // }
+
+  componentWillMount() {
+    clearInterval(this.timer)
+    this.timer = null
   }
 
   render() {

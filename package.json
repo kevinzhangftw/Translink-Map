@@ -6,6 +6,7 @@
     "dotenv": "^6.0.0",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
+    "react-async-poll": "^1.0.0",
     "react-dom": "^16.5.2",
     "react-map-gl": "^3.3.5",
     "react-redux": "^5.0.7",

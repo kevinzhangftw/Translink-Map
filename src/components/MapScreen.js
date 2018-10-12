@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import ReactMapGL from 'react-map-gl'
 import PropTypes from 'prop-types'
-// import mapboxGl from '../css/mapbox-gl.css'
-// import BusPin from '../assets/BusPin'
+
 
 class MapScreen extends Component {
   state = {
