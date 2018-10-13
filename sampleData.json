@@ -1,0 +1,17 @@
+
+[
+    {
+        "VehicleNo": "9790",
+        "TripId": 9993358,
+        "RouteNo": "210",
+        "Direction": "NORTH",
+        "Destination": "UPPER LYNN VALLEY",
+        "Pattern": "N1",
+        "Latitude": 49.313417,
+        "Longitude": -123.038133,
+        "RecordedTime": "09:53:59 am",
+        "RouteMap": {
+            "Href": "http://nb.translink.ca/geodata/210.kmz"
+        }
+    }
+]
