@@ -29,14 +29,11 @@ describe('async actions', () => {
   afterEach(() => mock.teardown())
 
   it('creates READ_RESOURCES_SUCCESS when fetching buses has been done', () => {
-    const store = mockStore({ buses: [] })
+    const store = mockStore({ buses: {resources:{}, requests:{}} })
     mock
       .get(config.apiUrl, { body: sampleData, headers: { 'content-type': 'application/json' } })
 
-    const expectedActions = [
-      { type: actionTypes.READ_RESOURCES_PENDING },
-      { type: actionTypes.READ_RESOURCES_SUCCESS, body: sampleData }
-    ]
+    const expectedActions = { buses: { resources: {}, requests: {} } }
 
     return store.dispatch(fetchResources()).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
