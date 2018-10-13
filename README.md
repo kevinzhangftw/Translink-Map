@@ -4,17 +4,20 @@ Translink Map App demonstrating the use of Redux resources and HOCs
 
 `git clone https://github.com/kevinzhangftw/Translink-Map.git`
 
+## Installation
+
 `yarn`
 
 yarn will install all the packages
 
-To Run the app locally, the easiest way to deal with the CORS (Allow-Control-Allow-Origin) problem is to install the chrome extension
+## Setup
+1. To Run the app locally, the easiest way to deal with the CORS (Allow-Control-Allow-Origin) problem is to install the chrome extension
 
 #### Allow-Control-Allow-Origin
 
 Remember to turn on the extension only when needed, as it does interfere with some sites like youtube.
 
-You will need to set your keys and store it in the .env file in the root directory
+2. You will need to set your keys and store it in the .env file in the root directory
 
 `touch .env`
 
@@ -31,7 +34,7 @@ REACT_APP_MAPTOKEN=<ur-key>
 REACT_APP_TRANSLINK=<ur-key>
 ```
 
-Now you are ready to start the app!
+And That's it! Now you are ready to start the app!
 
 `yarn start`
 
