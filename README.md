@@ -11,13 +11,17 @@ Translink Map App demonstrating the use of Redux resources and HOCs
 yarn will install all the packages
 
 ## Setup
-1. To Run the app locally, the easiest way to deal with the CORS (Allow-Control-Allow-Origin) problem is to install the chrome extension
+### 1. Chrome Extension
+
+To Run the app locally, the easiest way to deal with the CORS (Allow-Control-Allow-Origin) problem is to install the chrome extension
 
 #### Allow-Control-Allow-Origin
 
 Remember to turn on the extension only when needed, as it does interfere with some sites like youtube.
 
-2. You will need to set your keys and store it in the .env file in the root directory
+### 2. ENV
+
+You will need to set your keys and store it in the .env file in the root directory
 
 `touch .env`
 

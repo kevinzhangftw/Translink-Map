@@ -10,7 +10,7 @@ import { getBusesArray } from '../selectors/buses'
 
 class HomeScreenContainer extends Component {
   componentDidMount() {
-    const fetchInterval = 15 * 1000
+    const fetchInterval = 7 * 1000
     this.timer = setInterval(this.props.fetchBuses, fetchInterval)
   }
 
