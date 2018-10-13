@@ -10,7 +10,20 @@ import { getBusesArray } from '../selectors/buses'
 
 class HomeScreenContainer extends Component {
   componentDidMount() {
-    this.props.fetchBuses()
+    const fetchInterval = 15 * 1000
+    this.timer = setInterval(this.props.fetchBuses, fetchInterval)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.buses !== nextProps.buses) {
+      return true
+    }
+    return false
+  }
+
+  componentWillMount() {
+    clearInterval(this.timer)
+    this.timer = null
   }
 
   render() {
@@ -30,7 +43,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 HomeScreenContainer.propTypes = {
-  fetchBuses: PropTypes.func
+  fetchBuses: PropTypes.func,
+  buses: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreenContainer)

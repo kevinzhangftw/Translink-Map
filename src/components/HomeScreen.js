@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Marker } from 'react-map-gl'
 import MapScreen from './MapScreen'
-import BusPin from '../assets/BusPin'
+import BusDot from '../assets/BusDot.png'
 
 class HomeScreen extends Component {
   currentLatitude = 49.2811831
@@ -11,13 +11,11 @@ class HomeScreen extends Component {
 
   renderBusPin = bus => (
     <Marker key={bus.VehicleNo} latitude={bus.Latitude} longitude={bus.Longitude}>
-      <BusPin />
+      <img src={BusDot} width='12' height='12' alt='BusDot'/>
     </Marker>
   )
 
-  renderBusPins = (buses, renderBusPin) => {
-    return buses && buses.map(bus => renderBusPin(bus))
-  }
+  renderBusPins = (buses, renderBusPin) => buses && buses.map(bus => renderBusPin(bus))
 
   render() {
     return (
