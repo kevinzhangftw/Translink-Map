@@ -49,7 +49,8 @@ class MapScreen extends Component {
 MapScreen.propTypes = {
   currentLatitude: PropTypes.number,
   currentLongitude: PropTypes.number,
-  zoomLevel: PropTypes.number
+  zoomLevel: PropTypes.number,
+  busPins: PropTypes.array
 }
 
 export default MapScreen

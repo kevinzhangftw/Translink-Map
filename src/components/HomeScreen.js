@@ -15,9 +15,7 @@ class HomeScreen extends Component {
     </Marker>
   )
 
-  renderBusPins = (buses, renderBusPin) => {
-    return buses && buses.map(bus => renderBusPin(bus))
-  }
+  renderBusPins = (buses, renderBusPin) => buses && buses.map(bus => renderBusPin(bus))
 
   render() {
     return (
